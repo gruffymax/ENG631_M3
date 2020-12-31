@@ -20,11 +20,14 @@ begin
     flipflop: process(i_CE)
     begin
         if (rising_edge(i_CE)) then
-            if (i_Clr = '0') then
-                o_Q <= i_D;
-            else
-                o_Q <= '0';
-            end if;
+            case i_Clr is
+                when '1' =>
+                    o_Q <= '0';
+                when '0' =>
+                    o_Q <= i_D;
+                when others =>
+                    o_Q <= '0';
+            end case;
         end if;
     end process flipflop;
 end behavioral;

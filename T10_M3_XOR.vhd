@@ -9,7 +9,7 @@ entity T10_M3_XOR is
     (
         i_a : in std_logic;
         i_b : in std_logic;
-        o_y : out std_logic;
+        o_y : out std_logic
     );
 end T10_M3_XOR;
 architecture behavioral of T10_M3_XOR is

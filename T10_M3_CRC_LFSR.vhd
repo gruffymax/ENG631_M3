@@ -4,7 +4,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity T10_M3_CRC is
+entity T10_M3_CRC_LFSR is
     port
     (
         i_CE    : in std_logic;
@@ -12,8 +12,8 @@ entity T10_M3_CRC is
         i_Clr   : in std_logic;
         o_crc   : out std_logic_vector(2 downto 0)
     );
-end T10_M3_CRC;
-architecture behavioral of T10_M3_CRC is
+end T10_M3_CRC_LFSR;
+architecture behavioral of T10_M3_CRC_LFSR is
     signal w_ff2_Q : std_logic;
     signal w_ff1_Q : std_logic;
     signal w_ff0_Q : std_logic;
@@ -64,7 +64,7 @@ begin
             o_y => w_xor0_o
         );
 
-    o_crc[2] <= w_ff2_Q;
-    o_crc[1] <= w_ff1_Q;
-    o_crc[0] <= w_ff0_Q;
+    o_crc(2) <= w_ff2_Q;
+    o_crc(1) <= w_ff1_Q;
+    o_crc(0) <= w_ff0_Q;
 end behavioral;

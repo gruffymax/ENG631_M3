@@ -8,10 +8,10 @@ entity TB_FlipFlop is
 end TB_FlipFlop;
 
 architecture Behavioral of TB_FlipFlop is
-    signal i_CE     : std_logic;
+    signal i_CE     : std_logic := '0';
     signal i_D      : std_logic := '1';
     signal i_Clr   : std_logic := '0';
-    signal o_Q      : std_logic;
+    signal o_Q      : std_logic := '0';
  
 
     --Simulation constants
