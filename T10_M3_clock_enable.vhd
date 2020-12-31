@@ -3,7 +3,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity T10_M2_clock_enable is
+entity T10_M3_clock_enable is
     generic
     (
         g_period_count : integer
@@ -11,15 +11,16 @@ entity T10_M2_clock_enable is
 
     port
     (  
-        i_C100MHz       : in STD_LOGIC;
-        i_Reset         : in STD_LOGIC;
-        o_CE            : out STD_LOGIC
+        i_C100MHz       : in std_logic;
+        i_Reset         : in std_logic;
+        o_CE1           : out std_logic;
+        o_CE2           : out std_logic    
     );
-end T10_M2_clock_enable;
+end T10_M3_clock_enable;
 
 
 
-architecture CE of T10_M2_clock_enable is
+architecture CE of T10_M3_clock_enable is
     signal r_CE_Counter : integer range 0 to g_period_count;
 
 begin
@@ -36,16 +37,27 @@ begin
         end if;
     end process count;
 
-    compare: process(i_C100MHz, i_Reset)
+    compare1: process(i_C100MHz, i_Reset)
     begin
         if (i_Reset = '1') then --Reset CE output
-            o_CE <= '0';
+            o_CE1 <= '0';
         elsif falling_edge(i_C100MHz) then
             if (r_CE_Counter = g_period_count) then --Compare and trigger pulse
-                o_CE <= '1';
+                o_CE1 <= '1';
             else
-                o_CE <= '0';
+                o_CE1 <= '0';
             end if;
         end if;
-    end process compare;
+    end process compare1;
+
+    compare2: process(i_C100MHz)
+    begin
+        if (rising_edge(i_C100MHz)) then
+            if (o_CE1 = '1') then
+                o_CE2 <= '1';
+            else
+                o_CE2 <= '0';
+            end if;
+       end if;
+    end process compare2;         
 end CE;
