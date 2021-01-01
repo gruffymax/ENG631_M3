@@ -13,8 +13,7 @@ entity T10_M3_clock_enable is
     (  
         i_C100MHz       : in std_logic;
         i_Reset         : in std_logic;
-        o_CE1           : out std_logic;
-        o_CE2           : out std_logic    
+    	o_CE		: out std_logic
     );
 end T10_M3_clock_enable;
 
@@ -22,7 +21,7 @@ end T10_M3_clock_enable;
 
 architecture CE of T10_M3_clock_enable is
     signal r_CE_Counter : integer range 0 to g_period_count;
-    signal r_CE1 : std_logic;
+    signal r_CE : std_logic;
 
 begin
     count: process(i_C100Mhz, i_Reset)
@@ -38,29 +37,18 @@ begin
         end if;
     end process count;
 
-    compare1: process(i_C100MHz, i_Reset)
+    compare: process(i_C100MHz, i_Reset)
     begin
         if (i_Reset = '1') then --Reset CE output
-            r_CE1 <= '0';
+            r_CE <= '0';
         elsif falling_edge(i_C100MHz) then
             if (r_CE_Counter = g_period_count) then --Compare and trigger pulse
-                r_CE1 <= '1';
+                r_CE <= '1';
             else
-                r_CE1 <= '0';
+                r_CE <= '0';
             end if;
         end if;
-    end process compare1;
-
-    compare2: process(i_C100MHz)
-    begin
-        if (rising_edge(i_C100MHz)) then
-            if (r_CE1 = '1') then
-                o_CE2 <= '1';
-            else
-                o_CE2 <= '0';
-            end if;
-       end if;
-    end process compare2; 
+    end process compare;
     
-    o_CE1 <= r_CE1;
+    o_CE <= r_CE;
 end CE;
