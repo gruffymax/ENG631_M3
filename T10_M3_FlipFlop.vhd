@@ -22,11 +22,11 @@ begin
         if (rising_edge(i_CE)) then
             case i_Clr is
                 when '1' =>
-                    o_Q <= '0';
+                    o_Q <= '0' after 1 ns;
                 when '0' =>
-                    o_Q <= i_D;
+                    o_Q <= i_D after 1 ns;
                 when others =>
-                    o_Q <= '0';
+                    o_Q <= '0' after 1 ns;
             end case;
         end if;
     end process flipflop;

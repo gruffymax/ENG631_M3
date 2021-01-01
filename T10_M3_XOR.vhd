@@ -15,5 +15,5 @@ end T10_M3_XOR;
 architecture behavioral of T10_M3_XOR is
 
 begin
-    o_y <= i_a xor i_b;
+    o_y <= i_a xor i_b after 1 ns;
 end behavioral;

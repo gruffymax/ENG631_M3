@@ -40,12 +40,12 @@ begin
     compare: process(i_C100MHz, i_Reset)
     begin
         if (i_Reset = '1') then --Reset CE output
-            r_CE <= '0';
+            r_CE <= '0' after 1 ns;
         elsif falling_edge(i_C100MHz) then
             if (r_CE_Counter = g_period_count) then --Compare and trigger pulse
-                r_CE <= '1';
+                r_CE <= '1' after 1 ns;
             else
-                r_CE <= '0';
+                r_CE <= '0' after 1 ns;
             end if;
         end if;
     end process compare;

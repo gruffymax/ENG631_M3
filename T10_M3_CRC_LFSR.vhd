@@ -64,7 +64,7 @@ begin
             o_y => w_xor0_o
         );
 
-    o_crc(2) <= w_ff2_Q;
-    o_crc(1) <= w_ff1_Q;
-    o_crc(0) <= w_ff0_Q;
+    o_crc(2) <= w_ff2_Q after 1 ns;
+    o_crc(1) <= w_ff1_Q after 1 ns;
+    o_crc(0) <= w_ff0_Q after 1 ns;
 end behavioral;
