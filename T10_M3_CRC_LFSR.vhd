@@ -14,9 +14,9 @@ entity T10_M3_CRC_LFSR is
     );
 end T10_M3_CRC_LFSR;
 architecture behavioral of T10_M3_CRC_LFSR is
-    signal w_ff2_Q : std_logic;
-    signal w_ff1_Q : std_logic;
-    signal w_ff0_Q : std_logic;
+    signal w_ff2_Q : std_logic := '0';
+    signal w_ff1_Q : std_logic := '0';
+    signal w_ff0_Q : std_logic := '0';
     signal w_xor1_o : std_logic;
     signal w_xor0_o : std_logic;
 

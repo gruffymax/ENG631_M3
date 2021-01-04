@@ -39,28 +39,28 @@ begin
         
         wait for 50 ns;
         i_data <= '1'; --Data
-        --wait for 50 ns;
-        i_CE <= '1';
-        wait for 100 ns;
-        i_CE <= '0';
-
-        wait for 50 ns;
-        i_data <= '1'; --Data
-        --wait for 50 ns;
-        i_CE <= '1';
-        wait for 100 ns;
-        i_CE <= '0';
-        
-        wait for 50 ns;
-        i_data <= '1'; --Data
-        --wait for 50 ns;
+        wait for 5 ns;
         i_CE <= '1';
         wait for 100 ns;
         i_CE <= '0';
 
         wait for 50 ns;
         i_data <= '0'; --Data
-        --wait for 50 ns;
+        wait for 5 ns;
+        i_CE <= '1';
+        wait for 100 ns;
+        i_CE <= '0';
+        
+        wait for 50 ns;
+        i_data <= '1'; --Data
+        wait for 5 ns;
+        i_CE <= '1';
+        wait for 100 ns;
+        i_CE <= '0';
+
+        wait for 50 ns;
+        i_data <= '0'; --Data
+        wait for 5 ns;
         i_CE <= '1';
         wait for 100 ns;
         i_CE <= '0';

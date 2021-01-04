@@ -12,8 +12,7 @@ architecture Behavioral of TB_clock250hz is
     signal i_Reset   : STD_LOGIC := '0';
     
     --Outputs
-    signal o_CE1      : STD_LOGIC := '0';
-    signal o_CE2      : std_logic := '0';
+    signal o_CE      : STD_LOGIC := '0';
 
     --Simulation specifics
     constant C100MHz_Period : time := 10 ns;
@@ -28,8 +27,7 @@ begin
         (
             i_C100MHz => i_C100MHz,
             i_Reset => i_Reset,
-            o_CE1 => o_CE1,
-            o_CE2 => o_CE2
+            o_CE => o_CE
         );
 
     --Clock Process Definition
