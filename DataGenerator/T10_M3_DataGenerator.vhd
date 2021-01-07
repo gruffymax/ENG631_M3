@@ -10,7 +10,6 @@ entity T10_M3_DataGenerator is
         i_CE1       : in std_logic;
         i_mode      : in std_logic_vector(3 downto 0);
         i_start     : in std_logic;
-        i_resend    : in std_logic; -- Resend signal from CRC. Active High
         o_data      : out std_logic_vector(3 downto 0)
     );
 end T10_M3_DataGenerator;
@@ -22,35 +21,9 @@ architecture behavioral of T10_M3_DataGenerator is
     signal w_student        : std_logic_vector(3 downto 0);
     signal w_temp           : std_logic_vector(3 downto 0);
     signal w_CE1            : std_logic;
-    signal r_CE1_active     : std_logic;
 
 
 begin
-    resend: process(i_Clk)
-    begin
-        if (rising_edge(i_Clk)) then
-            if (i_CE1 = '1') then
-                r_CE1_active <= '1';
-            else
-                r_CE1_active <= '0';
-            end if;
-        end if;
-    end process resend;
-
-    holdCE: process(i_Clk)
-    begin
-        if (falling_edge(i_Clk)) then
-            if (i_resend = '0') then
-                if (r_CE1_active = '1') then
-                    w_CE1 <= '1';
-                else
-                    w_CE1 <= '0';
-                end if;
-            else
-                w_CE1 <= '0';
-            end if;
-        end if;
-    end process holdCE;
 
     fixed: entity work.T10_M3_DG_fixed(behavioral)
         port map
