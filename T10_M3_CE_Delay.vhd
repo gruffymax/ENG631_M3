@@ -18,31 +18,36 @@ entity T10_M3_CE_Delay is
 end T10_M3_CE_Delay;
 
 architecture behavioral of T10_M3_CE_Delay is
-    signal r_trigger : std_logic := '0';
-    signal r_count   : unsigned(1 downto 0) := "00";
+    signal w_clr : std_logic := '0';
+    signal w_ff0 : std_logic;
+    signal w_ff1 : std_logic;
+    signal w_nclk : std_logic;
+
 begin
-    delay: process(i_Clk)
-    begin
-        if (rising_edge(i_Clk)) then
-            if (i_CE = '1') then
-                r_trigger <= '1';
-            end if;
-
-            if (r_trigger = '1') then
-                r_count <= r_count + 1;
-            end if;
-        end if;
-    end process delay;
-
-    trigger: process(i_Clk)
-    begin
-        if (falling_edge(i_Clk)) then
-            if (r_count = "11") then
-                o_CE <= '1';
-            else
-                o_CE <= '0';
-            end if;
-        end if;
-    end process trigger;
-    
+    ff0: entity work.T10_M3_FlipFlop(behavioral)
+        port map
+        (
+            i_CE => w_nclk,
+            i_D => i_CE,
+            i_Clr => w_Clr,
+            o_Q => w_ff0
+        );
+    ff1: entity work.T10_M3_FlipFlop(behavioral)
+        port map
+        (
+            i_CE => w_nclk,
+            i_D => w_ff0,
+            i_Clr => w_clr,
+            o_Q => w_ff1
+        );
+        
+    ff2: entity work.T10_M3_FlipFlop(behavioral)
+        port map
+        (
+            i_CE => w_nclk,
+            i_D => w_ff1,
+            i_Clr => w_clr,
+            o_Q => o_CE
+        );
+    w_nclk <= not i_Clk;
 end behavioral;
