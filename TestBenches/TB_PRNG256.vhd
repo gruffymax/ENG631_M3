@@ -10,11 +10,9 @@ end TB_PRNG256;
 architecture Behavioral of TB_PRNG256 is
     signal i_CE     : std_logic := '0';
     signal o_prn      : std_logic_vector(7 downto 0);
-    signal w_clr      : std_logic := '1';
 
     --Simulation constants
     constant clk_period : time := 1 ms;
-
 
 begin
     uut: entity work.T10_M3_PRNG256(Behavioral)
@@ -30,11 +28,4 @@ begin
         i_CE <= not i_CE; 
         wait for clk_period / 2;
     end process clock;
-
-    clr: process
-    begin
-        wait for clk_period;
-        w_clr <= '0';
-        wait;
-    end process clr;
 end Behavioral;

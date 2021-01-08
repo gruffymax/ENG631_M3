@@ -11,7 +11,6 @@ entity T10_M3_PRNG256 is
     port
     (
         i_CE    : in std_logic;
-        i_clr   : in std_logic;
         o_prn   : out std_logic_vector(7 downto 0)
     );
 end T10_M3_PRNG256;
@@ -28,14 +27,23 @@ architecture behavioral of T10_M3_PRNG256 is
     signal w_ff5_Q  : std_logic := '0';
     signal w_ff6_Q  : std_logic := '0';
     signal w_ff7_Q  : std_logic := '0';
+    signal w_clr    : std_logic := '1';
 
 begin
+
+    init: process(i_CE)
+    begin
+        if (rising_edge(i_CE)) then
+            w_clr <= '0';
+        end if;
+    end process init;
+
     ff0: entity work.T10_M3_FlipFlop(behavioral)
     port map
     (
         o_Q => w_ff0_Q,
         i_D => w_xnor2_o,
-        i_clr => i_clr,
+        i_clr => w_clr,
         i_CE => i_CE
     );
 
@@ -44,7 +52,7 @@ begin
         (
             o_Q => w_ff1_Q,
             i_D => w_ff0_Q,
-            i_clr => i_clr,
+            i_clr => w_clr,
             i_CE => i_CE
         );
 
@@ -53,7 +61,7 @@ begin
         (
             o_Q => w_ff2_Q,
             i_D => w_ff1_Q,
-            i_clr => i_clr,
+            i_clr => w_clr,
             i_CE => i_CE
         );
 
@@ -62,7 +70,7 @@ begin
         (
             o_Q => w_ff3_Q,
             i_D => w_ff2_Q,
-            i_clr => i_clr,
+            i_clr => w_clr,
             i_CE => i_CE
         );
 
@@ -71,7 +79,7 @@ begin
         (
             o_Q => w_ff4_Q,
             i_D => w_ff3_Q,
-            i_clr => i_clr,
+            i_clr => w_clr,
             i_CE => i_CE
         );
 
@@ -80,7 +88,7 @@ begin
         (
             o_Q => w_ff5_Q,
             i_D => w_ff4_Q,
-            i_clr => i_clr,
+            i_clr => w_clr,
             i_CE => i_CE
         );
 
@@ -89,16 +97,16 @@ begin
         (
             o_Q => w_ff6_Q,
             i_D => w_ff5_Q,
-            i_clr => i_clr,
+            i_clr => w_clr,
             i_CE => i_CE
         );
 
     ff7: entity work.T10_M3_FlipFlop(behavioral)
         port map
         (
-            o_Q => w_ff6_Q,
-            i_D => w_ff7_Q,
-            i_clr => i_clr,
+            o_Q => w_ff7_Q,
+            i_D => w_ff6_Q,
+            i_clr => w_clr,
             i_CE => i_CE
         );
 
