@@ -11,7 +11,7 @@ architecture behavioral of TB_Channel is
     --Inputs
     signal i_clk       : std_logic := '0';
     signal i_prn       : std_logic_vector(7 downto 0);
-    signal i_mode_sw0  : std_logic := '0';
+    signal i_mode_sw0  : std_logic := '1';
     signal i_mode_sw1  : std_logic := '1';
     --Outputs
     signal o_Irx       : std_logic_vector(7 downto 0);
