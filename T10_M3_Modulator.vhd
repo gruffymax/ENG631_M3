@@ -28,7 +28,7 @@ architecture behavioral of T10_M3_Modulator is
     type zero_waveform_t is array(0 to 7) of unsigned(7 downto 0);
     type one_waveform_t is array(0 to 7) of unsigned(7 downto 0);
     signal zero_waveform : zero_waveform_t := (x"80", x"A0", x"C0", x"A0", x"80", x"60", x"40", x"60");
-    signal one_waveform : one_waveform_t := (x"60", x"40", x"60", x"80", x"A0", x"C0", x"A0", x"80");
+    signal one_waveform : one_waveform_t   := (x"80", x"60", x"40", x"60", x"80", x"A0", x"C0", x"A0");
 
 begin
     count: process(i_Clk, i_Reset)
