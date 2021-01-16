@@ -42,7 +42,7 @@ begin
         port map
         (
             i_clk       => i_clk,
-            i_CE        => w_CE_delay,
+            i_CE        => w_CE_delay1,
             i_Itx       => w_Itx,
             i_Qtx       => w_Qtx,
             i_prn       => i_prn,
@@ -110,5 +110,11 @@ begin
             o_data => o_data,
             o_symbol => o_symbol
         );
-    
+    stimulus: process
+    begin
+        wait for 500 ms;
+        w_symbol <= "10";
+        wait for 500 ms;
+        w_symbol <= "01";
+    end process stimulus;
 end behavioral;
