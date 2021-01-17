@@ -42,7 +42,7 @@ begin
     begin
         wait for 1 ms;
         i_Start <= '1';
-        wait for 1 ms;
+        wait for 2 ms;
         i_Start <= '0';
         wait;
     end process start;
