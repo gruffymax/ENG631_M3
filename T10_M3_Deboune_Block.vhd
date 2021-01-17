@@ -78,6 +78,14 @@ begin
             o_output => o_sw12
         );
     
+    debounce11: entity work.T10_M3_Debounce(behavioral)
+        port map
+        (
+            i_input => i_sw11,
+            i_Clk => i_clk,
+            o_output => o_sw11
+        );
+
     debounce10: entity work.T10_M3_Debounce(behavioral)
         port map
         (
