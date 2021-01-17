@@ -33,10 +33,10 @@ entity T10_M3_Display_Mplx is
 end T10_M3_Display_Mplx;
 
 architecture behavioral of T10_M3_Display_Mplx is
-    w_D3    : std_logic_vector(3 downto 0) := x"0";
-    w_D2    : std_logic_vector(3 downto 0) := x"0";
-    w_D1    : std_logic_vector(3 downto 0) := x"0";
-    w_D0    : std_logic_vector(3 downto 0) := x"0";
+    signal w_D3    : std_logic_vector(3 downto 0) := x"0";
+    signal w_D2    : std_logic_vector(3 downto 0) := x"0";
+    signal w_D1    : std_logic_vector(3 downto 0) := x"0";
+    signal w_D0    : std_logic_vector(3 downto 0) := x"0";
 begin
     mplx: process(i_clk)
     begin

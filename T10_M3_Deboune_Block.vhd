@@ -31,7 +31,7 @@ entity T10_M3_Debounce_Block is
         o_sw9 : out std_logic;
         o_sw8 : out std_logic;
         o_sw7 : out std_logic;
-        o_sw0 : out std_logic;
+        o_sw0 : out std_logic
 
     );
 end T10_M3_Debounce_Block;
@@ -39,14 +39,14 @@ end T10_M3_Debounce_Block;
 architecture behavioral of T10_M3_Debounce_Block is
 
 begin
-    debounceStart: entity work.T10_M2_Debounce(behavioral)
+    debounceStart: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_start,
             i_Clk => i_clk,
             o_output => o_start
         );
-    debounce15: entity work.T10_M2_Debounce(behavioral)
+    debounce15: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw15,
@@ -54,7 +54,7 @@ begin
             o_output => o_sw15
         );
     
-    debounce14: entity work.T10_M2_Debounce(behavioral)
+    debounce14: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw14,
@@ -62,7 +62,7 @@ begin
             o_output => o_sw14
         );
 
-    debounce13: entity work.T10_M2_Debounce(behavioral)
+    debounce13: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw13,
@@ -70,7 +70,7 @@ begin
             o_output => o_sw13
         );
 
-    debounce12: entity work.T10_M2_Debounce(behavioral)
+    debounce12: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw12,
@@ -78,7 +78,7 @@ begin
             o_output => o_sw12
         );
     
-    debounce10: entity work.T10_M2_Debounce(behavioral)
+    debounce10: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw10,
@@ -86,7 +86,7 @@ begin
             o_output => o_sw10
         );
     
-    debounce9: entity work.T10_M2_Debounce(behavioral)
+    debounce9: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw9,
@@ -94,7 +94,7 @@ begin
             o_output => o_sw9
         );
 
-    debounce8: entity work.T10_M2_Debounce(behavioral)
+    debounce8: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw8,
@@ -102,7 +102,7 @@ begin
             o_output => o_sw8
         );
 
-    debounce7: entity work.T10_M2_Debounce(behavioral)
+    debounce7: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw7,
@@ -110,7 +110,7 @@ begin
             o_output => o_sw7
         );
 
-    debounce0: entity work.T10_M2_Debounce(behavioral)
+    debounce0: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_input => i_sw0,
