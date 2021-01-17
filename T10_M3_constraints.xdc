@@ -7,13 +7,16 @@ set_property -dict { PACKAGE_PIN W5   IOSTANDARD LVCMOS33 } [get_ports i_C100MHz
 create_clock -add -period 10.000 -name C100MHz_pin -waveform {0.000 5.000} [get_ports i_C100MHz]
 
 #LEDs
-set_property -dict { PACKAGE_PIN P1   IOSTANDARD LVCMOS33 } [get_ports {o_led[0]}]
-set_property -dict { PACKAGE_PIN L1   IOSTANDARD LVCMOS33 } [get_ports {o_led[1]}]
+set_property -dict { PACKAGE_PIN P1   IOSTANDARD LVCMOS33 } [get_ports {o_LED_tx[0]}]
+set_property -dict { PACKAGE_PIN L1   IOSTANDARD LVCMOS33 } [get_ports {o_LED_tx[1]}]
+set_property -dict { PACKAGE_PIN U16  IOSTANDARD LVCMOS33 } [get_ports {o_LED_rx[0]}]
+set_property -dict { PACKAGE_PIN E19  IOSTANDARD LVCMOS33 } [get_ports {o_LED_rx[1]}]
+
 
 # Buttons
 #BTNC - centre button
 set_property -dict { PACKAGE_PIN T18   IOSTANDARD LVCMOS33 } [get_ports i_Reset]
-set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports i_start]
+set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports i_Start]
 
 
 #Switches
@@ -21,6 +24,13 @@ set_property -dict { PACKAGE_PIN R2   IOSTANDARD LVCMOS33 } [get_ports i_sw15]
 set_property -dict { PACKAGE_PIN T1   IOSTANDARD LVCMOS33 } [get_ports i_sw14]
 set_property -dict { PACKAGE_PIN U1   IOSTANDARD LVCMOS33 } [get_ports i_sw13]
 set_property -dict { PACKAGE_PIN W2   IOSTANDARD LVCMOS33 } [get_ports i_sw12]
+
+set_property -dict { PACKAGE_PIN R3   IOSTANDARD LVCMOS33 } [get_ports i_sw11]
+set_property -dict { PACKAGE_PIN T2   IOSTANDARD LVCMOS33 } [get_ports i_sw10]
+set_property -dict { PACKAGE_PIN T3   IOSTANDARD LVCMOS33 } [get_ports i_sw9]
+set_property -dict { PACKAGE_PIN V2   IOSTANDARD LVCMOS33 } [get_ports i_sw8]
+set_property -dict { PACKAGE_PIN W13  IOSTANDARD LVCMOS33 } [get_ports i_sw7]
+set_property -dict { PACKAGE_PIN V17  IOSTANDARD LVCMOS33 } [get_ports i_sw0]
 
 
 #7 seg display
