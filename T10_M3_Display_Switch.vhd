@@ -49,5 +49,5 @@ begin
         
     o_display_switch(2) <= w_sw9;
     o_display_switch(1) <= w_sw8;
-    o_dislpay_switch(0) <= w_sw7;
+    o_display_switch(0) <= w_sw7;
 end behavioral;

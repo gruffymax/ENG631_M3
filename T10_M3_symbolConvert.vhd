@@ -18,7 +18,7 @@ architecture archSymbolConvert of T10_M3_symbolConvert is
 
 signal r_data0 : STD_LOGIC_VECTOR (1 downto 0);
 signal r_data1 : STD_LOGIC_VECTOR (1 downto 0);
-signal r_symbol : STD_LOGIC_VECTOR (3 downto 0) := "0000";
+signal r_symbol : STD_LOGIC_VECTOR (1 downto 0) := "00";
 signal r_dataCount : UNSIGNED (0 downto 0) := "0";
 
 begin 
