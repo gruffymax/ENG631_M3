@@ -1,7 +1,7 @@
 --Team 10 - 762102 872403
 --Version 1.0
 -- Tested on :-
--- Simulation   - No
+-- Simulation   - Yes
 -- Hardware     - No
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -16,8 +16,8 @@ entity T10_M3_ClkDivider is
 end T10_M3_ClkDivider;
 
 architecture behavioral of T10_M3_ClkDivider is
-    signal r_count : unsigned(3 downto 0) := 0;
-    signal r_out   : std_logic;
+    signal r_count : unsigned(2 downto 0) := "000";
+    signal r_out   : std_logic := '0';
 begin
     divide: process(i_clk)
     begin
