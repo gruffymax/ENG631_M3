@@ -43,7 +43,15 @@ begin
         if (rising_edge(i_clk)) then
             case i_select is
                 -- Normal M2 Display
-                when "X00" =>
+                when "000"  =>
+                    w_D3 <= i_DG_Mode;
+                    w_D2 <= i_DG_Data;
+                    w_D1(3 downto 1) <= "000";
+                    w_D1(0) <= i_SC_Symbol(1);
+                    w_D0(3 downto 1) <= "000";
+                    w_D0(0) <= i_SC_Symbol(0);
+
+                when "100"  =>
                     w_D3 <= i_DG_Mode;
                     w_D2 <= i_DG_Data;
                     w_D1(3 downto 1) <= "000";
