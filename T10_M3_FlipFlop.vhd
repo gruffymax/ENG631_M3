@@ -1,4 +1,4 @@
--- Team 10 - 762102 872403
+-- Team 10 - 762102
 --Version 1
 -- Tested on :-
 --  Simulation  - Yes

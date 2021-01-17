@@ -16,8 +16,8 @@ entity T10_M3_Channel is
         i_Itx       : in std_logic_vector(7 downto 0);
         i_Qtx       : in std_logic_vector(7 downto 0);
         i_prn       : in std_logic_vector(7 downto 0);
-        i_mode_sw0  : in std_logic;
-        i_mode_sw1  : in std_logic;
+        i_sw10      : in std_logic;
+        i_sw11      : in std_logic;
         o_Irx       : out std_logic_vector(7 downto 0);
         o_Qrx       : out std_logic_vector(7 downto 0)
     );
@@ -31,8 +31,8 @@ architecture behavioral of T10_M3_Channel is
     signal w_Qrx        : unsigned(7 downto 0) := x"00";
     signal r_Itx_temp   : unsigned(7 downto 0) := x"00";
     signal r_Qtx_temp   : unsigned(7 downto 0) := x"00";    
-    signal w_sw0        : std_logic;
-    signal w_sw1        : std_logic;
+    signal w_sw10        : std_logic;
+    signal w_sw11        : std_logic;
     signal r_mode       : std_logic_vector(1 downto 0);
 begin
     latch: process(i_CE)
@@ -57,8 +57,8 @@ begin
             r_random_64(1) <= i_prn(1);
             r_random_64(0) <= i_prn(0);
             --Latch mode
-            r_mode(0) <= w_sw0;
-            r_mode(1) <= w_sw1;
+            r_mode(0) <= w_sw10;
+            r_mode(1) <= w_sw11;
         end if;
     end process latch;
 
@@ -106,16 +106,16 @@ begin
         port map
         (
             i_Clk => i_clk,
-            i_input => i_mode_sw0,
-            o_output => w_sw0
+            i_input => i_sw10,
+            o_output => w_sw10
         );
     
     db1: entity work.T10_M3_Debounce(behavioral)
         port map
         (
             i_Clk => i_clk,
-            i_input => i_mode_sw1,
-            o_output => w_sw1
+            i_input => i_sw11,
+            o_output => w_sw11
         );      
 
     o_Irx <= std_logic_vector(w_Irx);

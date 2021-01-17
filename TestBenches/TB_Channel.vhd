@@ -41,8 +41,8 @@ begin
             i_Itx       => w_Itx,
             i_Qtx       => w_Qtx,
             i_prn       => i_prn,
-            i_mode_sw0  => i_mode_sw0,
-            i_mode_sw1  => i_mode_sw1,
+            i_sw10  => i_mode_sw0,
+            i_sw11  => i_mode_sw1,
             o_Irx       => o_Irx,
             o_Qrx       => o_Qrx
         );
@@ -72,6 +72,10 @@ begin
         );
 
     delay: entity work.T10_M3_CE_Delay(behavioral)
+        generic map
+        (
+            g_ce_delay => 2
+        )
         port map
         (
             i_CE => w_CE,

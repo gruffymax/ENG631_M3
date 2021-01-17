@@ -29,6 +29,10 @@ begin
         );
     
     delay: entity work.T10_M3_CE_Delay(behavioral)
+        generic map
+        (
+            g_ce_delay => 6
+        )
         port map
         (
             i_CE => i_CE,

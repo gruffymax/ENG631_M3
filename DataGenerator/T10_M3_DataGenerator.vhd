@@ -33,10 +33,8 @@ begin
     fixed: entity work.T10_M3_DG_fixed(behavioral)
         port map
         (
-            i_sysClock => i_Clk,
-            i_CE1Hz => w_CE1,
             i_mode => i_mode,
-            o_BCDOut2 => w_fixed
+            o_data => w_fixed
         );
 
     count: entity work.T10_M3_DG_Count(behavioral)
@@ -54,7 +52,7 @@ begin
         port map
         (
             i_CE => w_CE1,
-            o_data => w_rand
+            o_rand => w_rand
         );
 
     temp: entity work.T10_M3_DG_Temp(behavioral)
@@ -66,10 +64,11 @@ begin
     student: entity work.T10_M3_DG_student(behavioral)
         port map
         (
-            i_sysClock => i_Clk,
-            i_CE1Hz => w_CE1,
+            i_Clk => i_Clk,
+            i_CE => w_CE1,
             i_mode => i_mode,
-            o_BCDOut2 => w_student
+            o_data => w_student,
+            i_Reset => i_Reset
         );
     
     multiplex: entity work.T10_M3_DG_DataMultiplexer(behavioral)

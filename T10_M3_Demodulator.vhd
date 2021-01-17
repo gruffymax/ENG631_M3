@@ -17,7 +17,7 @@ entity T10_M3_Demodulator is
         i_Qrx   : in std_logic_vector(7 downto 0);
         i_Reset : in std_logic;
         o_data  : out std_logic_vector(3 downto 0);
-        o_symbol : out std_logic_vector(1 downto 0)
+        o_LED_rx: out std_logic_vector(1 downto 0)
     );
 end T10_M3_Demodulator;
 
@@ -132,9 +132,9 @@ begin
         if (falling_edge(i_Clk)) then
             if (r_symbol_n = "0") then
                 o_data <= r_data;
-                o_symbol <= r_symbol_1;
+                o_LED_rx <= "10";
             else
-                o_symbol <= r_symbol_0;
+                o_LED_rx <= "01";
             end if;
         end if;
     end process outputData;
