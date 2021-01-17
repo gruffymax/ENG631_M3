@@ -30,7 +30,7 @@ architecture behavioral of T10_M3_Top_TB is
     signal o_LED_rx : std_logic_vector(1 downto 0) := "00";
 
     -- Simulation specifics
-    constant clk_period : time := 10 ns;
+    constant clk_period : time := 1 ns;
 begin
     Top: entity work.T10_M3_Top(behavioral)
         port map
@@ -53,7 +53,7 @@ begin
             o_LED_tx            => o_LED_tx,
             o_LED_rx            => o_LED_rx
         );
-        
+
     clock: process
     begin
         wait for clk_period / 2;
@@ -62,9 +62,9 @@ begin
 
     start: process
     begin
-        wait for 1 ms;
+        wait for 100 us;
         i_Start <= '1';
-        wait for 1 ms;
+        wait for 3 ms;
         i_Start <= '0';
         wait;
     end process start;
