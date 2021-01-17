@@ -10,6 +10,8 @@ entity T10_M3_Debounce_Block is
     port
     (
         i_clk  : in std_logic;
+        i_start: in std_logic;
+        i_slow : in std_logic;
         i_sw15 : in std_logic;
         i_sw14 : in std_logic;
         i_sw13 : in std_logic;
@@ -20,16 +22,19 @@ entity T10_M3_Debounce_Block is
         i_sw8 : in std_logic;
         i_sw7 : in std_logic;
         i_sw0 : in std_logic;
-        o_sw15 : in std_logic;
-        o_sw14 : in std_logic;
-        o_sw13 : in std_logic;
-        o_sw12 : in std_logic;
-        o_sw11 : in std_logic;
-        o_sw10 : in std_logic;
-        o_sw9 : in std_logic;
-        o_sw8 : in std_logic;
-        o_sw7 : in std_logic;
-        o_sw0 : in std_logic;
+        o_start: out std_logic;
+        o_slow : out std_logic;
+        o_sw15 : out std_logic;
+        o_sw14 : out std_logic;
+        o_sw13 : out std_logic;
+        o_sw12 : out std_logic;
+        o_sw11 : out std_logic;
+        o_sw10 : out std_logic;
+        o_sw9 : out std_logic;
+        o_sw8 : out std_logic;
+        o_sw7 : out std_logic;
+        o_sw0 : out std_logic;
+
     );
 end T10_M3_Debounce_Block;
 
