@@ -11,7 +11,6 @@ entity T10_M3_Debounce_Block is
     (
         i_clk  : in std_logic;
         i_start: in std_logic;
-        i_slow : in std_logic;
         i_sw15 : in std_logic;
         i_sw14 : in std_logic;
         i_sw13 : in std_logic;
@@ -23,7 +22,6 @@ entity T10_M3_Debounce_Block is
         i_sw7 : in std_logic;
         i_sw0 : in std_logic;
         o_start: out std_logic;
-        o_slow : out std_logic;
         o_sw15 : out std_logic;
         o_sw14 : out std_logic;
         o_sw13 : out std_logic;
@@ -41,6 +39,13 @@ end T10_M3_Debounce_Block;
 architecture behavioral of T10_M3_Debounce_Block is
 
 begin
+    debounceStart: entity work.T10_M2_Debounce(behavioral)
+        port map
+        (
+            i_input => i_start,
+            i_Clk => i_clk,
+            o_output => o_start
+        );
     debounce15: entity work.T10_M2_Debounce(behavioral)
         port map
         (
