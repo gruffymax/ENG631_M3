@@ -32,6 +32,28 @@ architecture behavioral of T10_M3_Top_TB is
     -- Simulation specifics
     constant clk_period : time := 10 ns;
 begin
+    Top: entity work.T10_M3_Top(behavioral)
+        port map
+        (
+            i_C100MHz   => i_C100MHz,
+            i_Reset     => i_Reset,
+            i_Start     => i_Start,
+            i_sw15      => i_sw15,
+            i_sw14      => i_sw14,
+            i_sw13      => i_sw13,
+            i_sw12      => i_sw12,
+            i_sw11      => i_sw11,
+            i_sw10      => i_sw10,
+            i_sw9       => i_sw9,
+            i_sw8       => i_sw8,
+            i_sw7       => i_sw7,
+            i_sw0       => i_sw0,
+            o_SegmentCathodes   => o_SegmentCathodes,
+            o_SegmentAnodes     => o_SegmentAnodes,
+            o_LED_tx            => o_LED_tx,
+            o_LED_rx            => o_LED_rx
+        );
+        
     clock: process
     begin
         wait for clk_period / 2;
