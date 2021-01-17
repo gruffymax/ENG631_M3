@@ -25,7 +25,6 @@ architecture behavioral of T10_M3_DataGenerator is
     signal w_rand           : std_logic_vector(3 downto 0);
     signal w_student        : std_logic_vector(3 downto 0);
     signal w_temp           : std_logic_vector(3 downto 0);
-    signal w_CE1            : std_logic;
 
 
 begin
@@ -43,7 +42,7 @@ begin
             i_start => i_start,
             i_Clk => i_Clk,
             i_Reset => i_Reset,
-            i_CE => w_CE1,
+            i_CE => i_CE1,
             i_mode => i_mode,
             o_data => w_count
         );
@@ -51,7 +50,7 @@ begin
     rand: entity work.T10_M3_DG_Random(behavioral)
         port map
         (
-            i_CE => w_CE1,
+            i_CE => i_CE1,
             o_rand => w_rand
         );
 
@@ -65,7 +64,7 @@ begin
         port map
         (
             i_Clk => i_Clk,
-            i_CE => w_CE1,
+            i_CE => i_CE1,
             i_mode => i_mode,
             o_data => w_student,
             i_Reset => i_Reset
