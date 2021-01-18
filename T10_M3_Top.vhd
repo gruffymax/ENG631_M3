@@ -256,6 +256,7 @@ begin
             i_CE1Hz => w_CE1_delay,
             i_CE2Hz => w_CE2_delay,
             o_LED_tx => o_LED_tx,
+            i_Reset => i_Reset,
             o_symbol => w_symbol
         );
 
