@@ -27,7 +27,7 @@ begin
     symbolConvertProc : process (i_sysClock, i_Reset)
 begin
     if (i_Reset = '1') then
-        r_data_Count = "0";
+        r_dataCount <= "0";
         o_LED_tx <= "10";
     elsif rising_edge(i_sysClock) then
         if i_CE2Hz = '1' then
