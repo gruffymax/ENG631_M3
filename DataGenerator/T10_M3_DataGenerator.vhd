@@ -60,14 +60,13 @@ begin
             o_data => w_temp
         );
         
-    student: entity work.T10_M3_DG_student(behavioral)
+    student: entity work.T10_M3_studentDG(archStudentDG)
         port map
         (
-            i_Clk => i_Clk,
-            i_CE => i_CE1,
+            i_sysclock => i_Clk,
+            i_CE1Hz => i_CE1,
             i_mode => i_mode,
-            o_data => w_student,
-            i_Reset => i_Reset
+            o_BCDOut2 => w_student
         );
     
     multiplex: entity work.T10_M3_DG_DataMultiplexer(behavioral)
