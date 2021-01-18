@@ -183,11 +183,11 @@ begin
     CE250  : entity work.T10_M3_clock_enable(CE)
         generic map
         (
-            g_period_count => 400000
+            g_period_count => 100000
         )
         port map
         ( 
-            i_C100MHz => w_CLK_100M,
+            i_C100MHz => w_system_clk,
             i_Reset => i_Reset,
             o_CE => w_CE250
         );
@@ -316,7 +316,7 @@ begin
         port map
         (
             i_CE => w_CE16,
-            i_Clk => w_CLK_100M,
+            i_Clk => w_system_clk,
             o_CE => w_CE16_d6
         );
 
@@ -328,7 +328,7 @@ begin
         port map
         (
             i_CE => w_CE16,
-            i_Clk => w_CLK_100M,
+            i_Clk => w_system_clk,
             o_CE => w_CE16_d10
         );
 
@@ -340,7 +340,7 @@ begin
         port map
         (
             i_CE => w_CE16,
-            i_Clk => w_CLK_100M,
+            i_Clk => w_system_clk,
             o_CE => w_CE16_d14
         );
 
