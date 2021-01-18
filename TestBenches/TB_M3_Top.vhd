@@ -20,7 +20,7 @@ architecture behavioral of T10_M3_Top_TB is
     signal i_sw10       : std_logic := '0';
     signal i_sw9        : std_logic := '0';
     signal i_sw8        : std_logic := '0';
-    signal i_sw7        : std_logic := '0';
+    signal i_sw7        : std_logic := '1';
     signal i_sw0        : std_logic := '0';
 
     -- Outputs
