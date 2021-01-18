@@ -216,7 +216,7 @@ begin
     dataGen: entity work.T10_M3_DataGenerator(behavioral)
         port map
         (
-            i_Clk => w_CLK_100M,
+            i_Clk => w_system_clk,
             i_Reset => i_Reset,
             i_CE1 => w_CE1,
             i_mode => w_mode,
@@ -251,7 +251,7 @@ begin
     symbolConv: entity work.T10_M3_symbolConvert(archSymbolConvert)
         port map
         (
-            i_sysClock => w_CLK_100M,
+            i_sysClock => w_system_clk,
             i_data => w_DG_Data,
             i_CE1Hz => w_CE1_delay,
             i_CE2Hz => w_CE2_delay,
@@ -262,7 +262,7 @@ begin
     Display: entity work.T10_M3_displayDriver(archDisplayDriver)
         port map
         (
-            i_sysClock => w_CLK_100M,       
+            i_sysClock => w_system_clk,       
             i_Reset => i_Reset,        
             i_CE250Hz => w_CE250,       
             i_BCDInput0 => w_digit0,  
@@ -286,7 +286,7 @@ begin
     DisplayMux: entity work.T10_M3_Display_Mplx(behavioral)
         port map
         (
-            i_clk => w_CLK_100M,
+            i_clk => w_system_clk,
             i_select => w_display_switch,
             i_DG_Mode => w_mode,
             i_DG_Data => w_DG_Data,
@@ -346,7 +346,7 @@ begin
     Modulator: entity work.T10_M3_Modulator(behavioral)
         port map
         (
-            i_Clk => w_CLK_100M,
+            i_Clk => w_system_clk,
             i_CE16 => w_CE16_d6,
             i_symbol => w_symbol,
             i_Reset => i_Reset,
@@ -357,7 +357,7 @@ begin
     Channel: entity work.T10_M3_Channel(behavioral)
         port map
         (
-            i_clk => w_CLK_100M,
+            i_clk => w_system_clk,
             i_CE => w_CE16_d10,
             i_Itx => w_ItxA,
             i_Qtx => w_QtxA,
@@ -371,7 +371,7 @@ begin
     Demodulator: entity work.T10_M3_Demodulator(behavioral)
         port map
         (
-            i_clk => w_CLK_100M,
+            i_clk => w_system_clk,
             i_CE => w_CE16_d14,
             i_Irx => w_IrxA,
             i_Qrx => w_QrxA,
