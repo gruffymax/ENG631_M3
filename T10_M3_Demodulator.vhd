@@ -120,8 +120,8 @@ begin
                     
                 when st_output_data =>
                     -- Output data
-                    r_data(3 downto 2) <= r_symbol_0;
-                    r_data(1 downto 0) <= r_symbol_1;
+                    r_data(3 downto 2) <= r_symbol_1;
+                    r_data(1 downto 0) <= r_symbol_0;
                     r_current_state <= st_idle;
             end case;
         end if;

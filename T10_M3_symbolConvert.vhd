@@ -8,6 +8,7 @@ Port (
         i_data : in STD_LOGIC_VECTOR (3 downto 0); 
         i_CE1Hz : in STD_LOGIC;
         i_CE2Hz : in STD_LOGIC;
+        i_Reset : in std_logic;
         o_symbol: out std_logic_vector(1 downto 0);
         o_LED_tx : out STD_LOGIC_VECTOR (1 downto 0)
 );
@@ -23,9 +24,12 @@ signal r_dataCount : UNSIGNED (0 downto 0) := "0";
 
 begin 
 
-    symbolConvertProc : process (i_sysClock, i_CE2Hz, r_data1, r_data0)
+    symbolConvertProc : process (i_sysClock, i_Reset)
 begin
-    if rising_edge(i_sysClock) then
+    if (i_Reset = '1') then
+        r_data_Count = "0";
+        o_LED_tx <= "10";
+    elsif rising_edge(i_sysClock) then
         if i_CE2Hz = '1' then
             if r_dataCount = "0" then
                 r_symbol <= i_data(3 downto 2);
