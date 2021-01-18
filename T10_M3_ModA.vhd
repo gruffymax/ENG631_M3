@@ -12,7 +12,7 @@ entity T10_M3_ModA is
     (
         i_clk   : in std_logic;
         i_CE16  : in std_logic;
-        i_symbol: in std_logic;
+        i_symbol: in std_logic_vector(1 downto 0);
         i_Reset : in std_logic;
         i_sw10  : in std_logic;
         i_sw11  : in std_logic;
@@ -72,7 +72,7 @@ begin
             o_CE => w_CE16_d14
         );
 
-    Mod: entity work.T10_M3_Modulator(behavioral)
+    Modulator: entity work.T10_M3_Modulator(behavioral)
         port map
         (
             i_Clk    => i_clk,
@@ -91,8 +91,8 @@ begin
             i_Itx => w_Itx,
             i_Qtx => w_Qtx,
             i_prn => w_prn,
-            i_sw10 => w_sw10_db,
-            i_sw11 => w_sw11_db,
+            i_sw10 => i_sw10,
+            i_sw11 => i_sw11,
             o_Irx => w_Irx,
             o_Qrx => w_Qrx
         );
