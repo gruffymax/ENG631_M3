@@ -232,7 +232,7 @@ begin
         port map
         (
             i_CE => w_CE1,
-            i_Clk => w_CLK_100M,
+            i_Clk => w_system_clk,
             o_CE => w_CE1_delay
         );
 
@@ -244,7 +244,7 @@ begin
         port map
         (
             i_CE => w_CE2,
-            i_Clk => w_CLK_100M,
+            i_Clk => w_system_clk,
             o_CE => w_CE2_delay
         );
 
