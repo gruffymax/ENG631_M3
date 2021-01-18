@@ -183,7 +183,7 @@ begin
     CE250  : entity work.T10_M3_clock_enable(CE)
         generic map
         (
-            g_period_count => 100000
+            g_period_count => 50000
         )
         port map
         ( 
