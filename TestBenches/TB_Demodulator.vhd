@@ -15,7 +15,6 @@ architecture behavioral of TB_Demodulator is
     signal i_mode_sw1  : std_logic := '0';
     
     --Outputs
-    signal o_symbol       : std_logic_vector(1 downto 0);
     signal o_data       : std_logic_vector(3 downto 0);
     
     --Simulation specifics
@@ -115,8 +114,7 @@ begin
             i_Irx => w_Irx,
             i_Qrx => w_Qrx,
             i_Reset => w_Reset,
-            o_data => o_data,
-            o_symbol => o_symbol
+            o_data => o_data
         );
     stimulus: process
     begin
