@@ -17,7 +17,11 @@ entity T10_M3_ModA is
         i_sw10  : in std_logic;
         i_sw11  : in std_logic;
         o_data  : out std_logic_vector(3 downto 0);
-        o_LED_rx: out std_logic_vector(1 downto 0);
+        o_Itx   : out std_logic_vector(7 downto 0);
+        o_Qtx   : out std_logic_vector(7 downto 0);
+        o_Irx   : out std_logic_vector(7 downto 0);
+        o_Qrx   : out std_logic_vector(7 downto 0);
+        o_LED_rx: out std_logic_vector(1 downto 0)
     );
 end T10_M3_ModA;
 
@@ -29,6 +33,7 @@ architecture behavioral of T10_M3_ModA is
     signal w_CE16_d6  : std_logic := '0';
     signal w_CE16_d10 : std_logic := '0';
     signal w_CE16_d14 : std_logic := '0';
+    signal w_prn    : std_logic_vector(7 downto 0);
 
 begin
     CE16_D6: entity work.T10_M3_CE_Delay(behavioral)
@@ -103,5 +108,11 @@ begin
             o_data => o_data,
             o_LED_rx => o_LED_rx
         );
-        
+
+    PRNG: entity work.T10_M3_PRNG256(behavioral)
+        port map
+        (
+            i_CE => w_CE16_d6,
+            o_prn => w_prn
+        );
 end behavioral;

@@ -27,7 +27,7 @@ entity T10_M3_Top is
 end T10_M3_Top;
 
 architecture behavioral of T10_M3_Top is
-    --Clocks and CEs
+    -- Clocks and CEs
     signal w_CLK_100M   : std_logic;
     signal w_CLK_6M     : std_logic;
     signal w_system_clk  : std_logic;
@@ -37,11 +37,8 @@ architecture behavioral of T10_M3_Top is
     signal w_CE2_delay: std_logic;
     signal w_CE16     : std_logic;
     signal w_CE250    : std_logic;
-    signal w_CE16_d6  : std_logic;
-    signal w_CE16_d10 : std_logic;
-    signal w_CE16_d14 : std_logic;
 
-    --Inputs
+    -- Inputs
     signal w_sw15_db        : std_logic;
     signal w_sw14_db        : std_logic;
     signal w_sw13_db        : std_logic;
@@ -54,30 +51,37 @@ architecture behavioral of T10_M3_Top is
     signal w_sw0_db        : std_logic;
     signal w_start_db       : std_logic;
 
-    --Display
+    -- Display wires
     signal w_digit0         : std_logic_vector(3 downto 0);
     signal w_digit1         : std_logic_vector(3 downto 0);
     signal w_digit2         : std_logic_vector(3 downto 0);
     signal w_digit3         : std_logic_vector(3 downto 0);
 
-    --Other connections
-    --signal w_data_mp        : std_logic_vector(3 downto 0);
+    -- Modulation scheme A wires 762102
+    signal w_Dmod_DataA     : std_logic_vector(3 downto 0);
+    signal w_IrxA   : std_logic_vector(7 downto 0);
+    signal w_QrxA   : std_logic_vector(7 downto 0);
+    signal w_ItxA   : std_logic_vector(7 downto 0);
+    signal w_QtxA   : std_logic_vector(7 downto 0);
+
+    -- Modulation scheme B wires 872403
+    signal w_Dmod_DataB     : std_logic_vector(3 downto 0);
+    signal w_IrxB   : std_logic_vector(7 downto 0);
+    signal w_QrxB   : std_logic_vector(7 downto 0);
+    signal w_ItxB   : std_logic_vector(7 downto 0);
+    signal w_QtxB   : std_logic_vector(7 downto 0);
+
+    -- Shared Modulation scheme wires
     signal w_mode           : std_logic_vector(3 downto 0);
     signal w_start          : std_logic;
     signal w_symbol        : std_logic_vector(1 downto 0);
     signal w_DG_Data           : std_logic_vector(3 downto 0);
     signal w_display_switch     : std_logic_vector(2 downto 0);
-    signal w_Dmod_DataA     : std_logic_vector(3 downto 0);
-    signal w_Dmod_DataB     : std_logic_vector(3 downto 0);
-    signal w_ItxA   : std_logic_vector(7 downto 0);
-    signal w_QtxA   : std_logic_vector(7 downto 0);
-    signal w_ItxB   : std_logic_vector(7 downto 0);
-    signal w_QtxB   : std_logic_vector(7 downto 0);
-    signal w_IrxA   : std_logic_vector(7 downto 0);
-    signal w_QrxA   : std_logic_vector(7 downto 0);
-    signal w_IrxB   : std_logic_vector(7 downto 0);
-    signal w_QrxB   : std_logic_vector(7 downto 0);
-    signal w_prn    : std_logic_vector(7 downto 0);
+
+
+
+
+
 
 
     -- DCM generated component declaration, copied from stub VHDL file
@@ -307,84 +311,21 @@ begin
             o_D1 => w_digit1,
             o_D0 => w_digit0
         );
-    
-    CE16_D6: entity work.T10_M3_CE_Delay(behavioral)
-        generic map
-        (
-            g_ce_delay => 6
-        )
-        port map
-        (
-            i_CE => w_CE16,
-            i_Clk => w_system_clk,
-            o_CE => w_CE16_d6
-        );
 
-    CE16_D10: entity work.T10_M3_CE_Delay(behavioral)
-        generic map
-        (
-            g_ce_delay => 10
-        )
+    ModA: entity work.T10_M3_ModA(behavioral)
         port map
         (
-            i_CE => w_CE16,
-            i_Clk => w_system_clk,
-            o_CE => w_CE16_d10
-        );
-
-    CE16_D14: entity work.T10_M3_CE_Delay(behavioral)
-        generic map
-        (
-            g_ce_delay => 14
-        )
-        port map
-        (
-            i_CE => w_CE16,
-            i_Clk => w_system_clk,
-            o_CE => w_CE16_d14
-        );
-
-    Modulator: entity work.T10_M3_Modulator(behavioral)
-        port map
-        (
-            i_Clk => w_system_clk,
-            i_CE16 => w_CE16_d6,
-            i_symbol => w_symbol,
-            i_Reset => i_Reset,
-            o_DataI => w_ItxA,
-            o_DataQ => w_QtxA
-        );
-
-    Channel: entity work.T10_M3_Channel(behavioral)
-        port map
-        (
-            i_clk => w_system_clk,
-            i_CE => w_CE16_d10,
-            i_Itx => w_ItxA,
-            i_Qtx => w_QtxA,
-            i_prn => w_prn,
-            i_sw10 => w_sw10_db,
-            i_sw11 => w_sw11_db,
-            o_Irx => w_IrxA,
-            o_Qrx => w_QrxA
-        );
-
-    Demodulator: entity work.T10_M3_Demodulator(behavioral)
-        port map
-        (
-            i_clk => w_system_clk,
-            i_CE => w_CE16_d14,
-            i_Irx => w_IrxA,
-            i_Qrx => w_QrxA,
-            i_Reset => i_Reset,
-            o_data => w_Dmod_DataA,
-            o_LED_rx => o_LED_rx
-        );
-
-    PRNG: entity work.T10_M3_PRNG256(behavioral)
-        port map
-        (
-            i_CE => w_CE16_d6,
-            o_prn => w_prn
+            i_clk       => w_system_clk,
+            i_CE16      => w_CE16,
+            i_symbol    => w_symbol,
+            i_Reset     => i_Reset,
+            i_sw10      => w_sw10_db,
+            i_sw11      => w_sw11_db,
+            o_data      => w_Dmod_DataA,
+            o_Itx       => w_ItxA,
+            o_Qtx       => w_QtxA,
+            o_Irx       => w_IrxA,
+            o_Qrx       => w_QrxA,
+            o_LED_rx    => o_LED_rx
         );
 end behavioral;

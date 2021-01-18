@@ -1,8 +1,8 @@
 --Team 10 - 762102
---Version 0
+--Version 1
 -- Tested on :-
--- Simulation   - No
--- Hardware     - No
+-- Simulation   - Yes
+-- Hardware     - Yes
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
