@@ -336,6 +336,7 @@ begin
         (
             i_sysClock  => w_system_clk,
             i_CE2Hz     => w_CE2,
+            i_CE250Hz   => w_CE250,
             i_Symbol    => w_symbol,
             o_I_Tx      => w_ItxB,
             o_Q_Tx      => w_QtxB,
