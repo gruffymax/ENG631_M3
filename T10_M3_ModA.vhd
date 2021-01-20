@@ -113,4 +113,9 @@ begin
             i_CE => w_CE16_d6,
             o_prn => w_prn
         );
+
+    o_Irx <= w_Irx;
+    o_Qrx <= w_Qrx;
+    o_Itx <= w_Itx;
+    o_Qtx <= w_Qtx;
 end behavioral;
