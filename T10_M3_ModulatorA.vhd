@@ -8,7 +8,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.All;
 
-entity T10_M3_Modulator is
+entity T10_M3_ModulatorA is
     port
     (
         i_Clk       : in std_logic;
@@ -18,9 +18,9 @@ entity T10_M3_Modulator is
         o_dataI     : out std_logic_vector(7 downto 0);
         o_dataQ     : out std_logic_vector(7 downto 0)
     );
-end T10_M3_Modulator;
+end T10_M3_ModulatorA;
 
-architecture behavioral of T10_M3_Modulator is
+architecture behavioral of T10_M3_ModulatorA is
     signal r_symbol     : std_logic_vector(1 downto 0) := "00";
     signal r_count      : integer range 0 to 7 := 0;
     signal w_dataI      : std_logic_vector(7 downto 0) := x"00";
