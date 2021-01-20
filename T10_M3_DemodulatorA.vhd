@@ -8,7 +8,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.All;
 
-entity T10_M3_Demodulator is
+entity T10_M3_DemodulatorA is
     port
     (
         i_clk   : in std_logic;
@@ -19,9 +19,9 @@ entity T10_M3_Demodulator is
         o_data  : out std_logic_vector(3 downto 0);
         o_LED_rx: out std_logic_vector(1 downto 0)
     );
-end T10_M3_Demodulator;
+end T10_M3_DemodulatorA;
 
-architecture behavioral of T10_M3_Demodulator is
+architecture behavioral of T10_M3_DemodulatorA is
     type state_t is (st_idle, st_latch, st_mac, st_output_symbol, st_output_data);
     signal r_current_state : state_t := st_idle;
 

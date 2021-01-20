@@ -72,7 +72,7 @@ begin
             o_CE => w_CE16_d14
         );
 
-    Modulator: entity work.T10_M3_Modulator(behavioral)
+    ModulatorA: entity work.T10_M3_ModulatorA(behavioral)
         port map
         (
             i_Clk    => i_clk,
@@ -83,7 +83,7 @@ begin
             o_dataQ  => w_Qtx
         );
     
-    Channel: entity work.T10_M3_Channel(behavioral)
+    ChannelA: entity work.T10_M3_ChannelA(behavioral)
         port map
         (
             i_clk => i_clk,
@@ -97,7 +97,7 @@ begin
             o_Qrx => w_Qrx
         );
 
-    Demodulator: entity work.T10_M3_Demodulator(behavioral)
+    DemodulatorA: entity work.T10_M3_DemodulatorA(behavioral)
         port map
         (
             i_clk => i_clk,

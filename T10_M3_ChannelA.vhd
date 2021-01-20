@@ -8,7 +8,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.All;
 
-entity T10_M3_Channel is
+entity T10_M3_ChannelA is
     port
     (
         i_clk       : in std_logic;
@@ -21,9 +21,9 @@ entity T10_M3_Channel is
         o_Irx       : out std_logic_vector(7 downto 0);
         o_Qrx       : out std_logic_vector(7 downto 0)
     );
-end T10_M3_Channel;
+end T10_M3_ChannelA;
 
-architecture behavioral of T10_M3_Channel is
+architecture behavioral of T10_M3_ChannelA is
     signal r_random_16  : unsigned(3 downto 0);
     signal r_random_32  : unsigned(4 downto 0);
     signal r_random_64  : unsigned(5 downto 0);
