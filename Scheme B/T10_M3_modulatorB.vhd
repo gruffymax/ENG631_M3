@@ -5,6 +5,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity T10_M3_modulatorB is
 Port ( 
     i_sysClock      : in    STD_LOGIC;                       -- Clock Input
+    i_CE250Hz       : in    STD_LOGIC;                          
     i_symFlag       : inout STD_LOGIC;                       -- New Symbol Flag
     i_symInput      : in    STD_LOGIC_VECTOR(1 downto 0);
     o_I_Tx          : out   STD_LOGIC_VECTOR(7 downto 0);
@@ -23,8 +24,10 @@ architecture archModulatorB of T10_M3_modulatorB is
     
     signal r_IArray    : t_modArray := (others => x"00");
     signal r_QArray    : t_modArray := (others => x"00");
+    signal r_I_Tx      : STD_LOGIC_VECTOR(7 downto 0);
+    signal r_Q_Tx      : STD_LOGIC_VECTOR(7 downto 0);
     signal r_dataReady : STD_LOGIC;
-    signal r_modCount  : STD_LOGIC_VECTOR(2 downto 0);
+    signal r_modCount  : INTEGER range 0 to 7;
     
 begin
     
@@ -64,10 +67,21 @@ begin
     modTxProc: process (i_sysClock, r_dataReady)
     begin
         if rising_edge(i_sysClock) then
-            if r_dataReady = '1' then
-                
-            end if;
-        end if;
+            if i_CE250Hz = '1' then
+                if r_dataReady = '1' then
+                    if r_modCount = 7 then
+                       r_modCount <= 0;
+                    else
+                       r_modCount <= r_modCount + 1;                       
+                    end if;
+                    r_I_Tx <= r_IArray(r_modCount);
+                    r_Q_Tx <= r_QArray(r_modCount);                   
+                end if;
+             end if;
+         end if;
     end process modTxProc; 
+    
+    o_I_Tx <= r_I_Tx;
+    o_Q_Tx <= r_Q_Tx;
 
 end archModulatorB;

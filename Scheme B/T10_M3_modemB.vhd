@@ -13,6 +13,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity T10_M3_modem is
   Port (i_sysClock      : in  STD_LOGIC;
         i_CE2Hz         : in  STD_LOGIC;
+        i_CE250Hz       : in  STD_LOGIC;
         i_errorSelect   : in  STD_LOGIC_VECTOR(1 downto 0);
         i_Symbol        : in  STD_LOGIC_VECTOR(1 downto 0);
         o_I_Tx          : out STD_LOGIC_VECTOR(7 downto 0);
@@ -48,6 +49,7 @@ modulator: entity work.T10_M3_modulatorB(archModulatorB)
 port map
 (
     i_sysClock  => i_sysClock,
+    i_CE250Hz   => i_CE250Hz,
     i_symFlag   => r_symFlag,     
     i_symInput  => i_Symbol,
     o_I_Tx      => r_I_Tx,
@@ -58,6 +60,7 @@ error: entity work.T10_M3_errorChannelB(archErrorChannelB)
 port map
 (
     i_sysClock      => i_sysClock,   
+    i_CE250Hz       => i_CE250Hz,
     i_errorSelect   => i_errorSelect, 
     i_I_Tx          => r_I_Tx,
     i_Q_Tx          => r_Q_Tx,
