@@ -90,8 +90,7 @@ begin
             i_Itx => w_Itx,
             i_Qtx => w_Qtx,
             i_prn => w_prn,
-            i_sw10 => i_sw10,
-            i_sw11 => i_sw11,
+            i_error_switch => i_error_switch,
             o_Irx => w_Irx,
             o_Qrx => w_Qrx
         );
