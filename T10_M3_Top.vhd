@@ -329,7 +329,6 @@ begin
             i_symbol    => w_symbol,
             i_Reset     => i_Reset,
             i_error_switch => w_error_switch,
-            i_sw11      => w_sw11_db,
             o_data      => w_Dmod_DataA,
             o_Itx       => w_ItxA,
             o_Qtx       => w_QtxA,
