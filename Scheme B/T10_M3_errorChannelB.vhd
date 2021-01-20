@@ -13,6 +13,7 @@ Port (
         );
 end T10_M3_errorChannelB;
 
+
 architecture archErrorChannelB of T10_M3_errorChannelB is
 
     signal r_errorValue     : UNSIGNED(7 downto 0):= x"00";                 -- Random Number to be added to the transmission
