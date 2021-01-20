@@ -8,7 +8,7 @@ entity T10_M3_Error_Switch is
     (
         i_sw10  : in std_logic;
         i_sw11  : in std_logic;
-        o_error_switch  : out std_logic_vector(1 downto 0);
+        o_error_switch  : out std_logic_vector(1 downto 0)
     );
 end T10_M3_Error_Switch;
 

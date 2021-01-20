@@ -14,8 +14,7 @@ entity T10_M3_ModA is
         i_CE16  : in std_logic;
         i_symbol: in std_logic_vector(1 downto 0);
         i_Reset : in std_logic;
-        i_sw10  : in std_logic;
-        i_sw11  : in std_logic;
+        i_error_switch  : in std_logic_vector(1 downto 0);
         o_data  : out std_logic_vector(3 downto 0);
         o_Itx   : out std_logic_vector(7 downto 0);
         o_Qtx   : out std_logic_vector(7 downto 0);

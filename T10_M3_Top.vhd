@@ -77,6 +77,7 @@ architecture behavioral of T10_M3_Top is
     signal w_symbol        : std_logic_vector(1 downto 0);
     signal w_DG_Data           : std_logic_vector(3 downto 0);
     signal w_display_switch     : std_logic_vector(2 downto 0);
+    signal w_error_switch   : std_logic_vector(1 downto 0);
 
 
 
@@ -281,11 +282,18 @@ begin
     DisplaySwitch: entity work.T10_M3_Display_Switch(behavioral)
         port map
         (
-            i_clk => w_CLK_100M,
             i_sw9 => w_sw9_db,
             i_sw8 => w_sw8_db,
             i_sw7 => w_sw7_db,
             o_display_switch => w_display_switch
+        );
+
+    ErrorSwitch: entity work.T10_M3_Error_Switch(behavioral)
+        port map
+        (
+            i_sw10 => w_sw10_db,
+            i_sw11 => w_sw11_db,
+            o_error_switch => w_error_switch
         );
 
     DisplayMux: entity work.T10_M3_Display_Mplx(behavioral)
@@ -320,7 +328,7 @@ begin
             i_CE16      => w_CE16,
             i_symbol    => w_symbol,
             i_Reset     => i_Reset,
-            i_sw10      => w_sw10_db,
+            i_error_switch => w_error_switch,
             i_sw11      => w_sw11_db,
             o_data      => w_Dmod_DataA,
             o_Itx       => w_ItxA,
@@ -338,6 +346,7 @@ begin
             i_CE2Hz     => w_CE2,
             i_CE250Hz   => w_CE250,
             i_Symbol    => w_symbol,
+            i_errorSelect => w_error_switch,
             o_I_Tx      => w_ItxB,
             o_Q_Tx      => w_QtxB,
             o_dat_Rx    => w_Dmod_DataB,
