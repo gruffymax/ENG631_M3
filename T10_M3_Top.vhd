@@ -312,6 +312,7 @@ begin
             o_D0 => w_digit0
         );
 
+    -- 762102
     ModA: entity work.T10_M3_ModA(behavioral)
         port map
         (
@@ -327,5 +328,19 @@ begin
             o_Irx       => w_IrxA,
             o_Qrx       => w_QrxA,
             o_LED_rx    => o_LED_rx
+        );
+
+    -- 872403
+    ModB: entity work.T10_M3_modem(archModem)
+        port map
+        (
+            i_sysClock  => w_system_clk,
+            i_CE2Hz     => w_CE2,
+            i_Symbol    => w_symbol,
+            o_I_Tx      => w_ItxB,
+            o_Q_Tx      => w_QtxB,
+            o_dat_Rx    => w_Dmod_DataB,
+            o_I_Rx      => w_IrxB,
+            o_Q_Rx      => w_QrxB
         );
 end behavioral;
