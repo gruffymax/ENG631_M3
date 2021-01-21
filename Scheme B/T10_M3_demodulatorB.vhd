@@ -14,8 +14,8 @@ Port (
 end T10_M3_demodulatorB;
 
 architecture archDemodulatorB of T10_M3_demodulatorB is
-    type t_wavArray is array (0 to 7) of UNSIGNED(7 downto 0);
-    signal r_wav_ref    : t_wavArray := (x"80",x"60",x"40",x"60",x"80",x"A0",x"C0",x"A0"); -- one                     
+    type t_wavArray is array (0 to 7) of INTEGER;
+    signal r_wav_ref    : t_wavArray := (0,1,1,1,0,-1,-1,-1);                     
     
     signal r_I_Sum      :   INTEGER     := 0;                           -- mac value of I
     signal r_Q_Sum      :   INTEGER     := 0;                           -- mac value of Q
@@ -51,8 +51,8 @@ begin
                 else
                     r_dataCount <= r_dataCount + 1;                
                 end if;
-                r_I_Sum <= r_I_Sum + (to_integer(r_wav_ref(r_dataCount)) * to_integer(unsigned(i_I_Rx)));
-                r_Q_Sum <= r_Q_Sum + (to_integer(r_wav_ref(r_dataCount)) * to_integer(unsigned(i_Q_Rx)));
+                r_I_Sum <= r_I_Sum + (r_wav_ref(r_dataCount) * to_integer(unsigned(i_I_Rx)));
+                r_Q_Sum <= r_Q_Sum + (r_wav_ref(r_dataCount) * to_integer(unsigned(i_Q_Rx)));
             end if;
         end if;
     end process dataProc;
@@ -99,6 +99,6 @@ begin
             end if;
         end if;
     end process compProc;
-    o_data_Rx(1 downto 0)   <= r_symbol_0;
-    o_data_Rx(3 downto 2)   <= r_symbol_1;
+    o_data_Rx(1 downto 0)   <= r_symbol_1;
+    o_data_Rx(3 downto 2)   <= r_symbol_0;
 end archDemodulatorB;

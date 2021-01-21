@@ -5,6 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity T10_M3_errorChannelB is
 Port (
         i_sysClock          : in  STD_LOGIC;                         -- Clock Input
+        i_CE2Hz             : in  STD_LOGIC;
         i_CE250Hz           : in  STD_LOGIC;
         i_errorSelect       : in  STD_LOGIC_VECTOR (1 downto 0);     -- Error Select Switch Input
         i_I_Tx              : in  STD_LOGIC_VECTOR (7 downto 0);     -- I transmission in
@@ -16,8 +17,8 @@ end T10_M3_errorChannelB;
 
 architecture archErrorChannelB of T10_M3_errorChannelB is
 
-    signal r_errorI         : UNSIGNED(7 downto 0):= x"00";                 -- I with error added
-    signal r_errorQ         : UNSIGNED(7 downto 0):= x"00";                 -- Q with error added 
+    signal r_errorI         : UNSIGNED(7 downto 0);                 -- I with error added
+    signal r_errorQ         : UNSIGNED(7 downto 0);                 -- Q with error added 
     signal r_rand           : STD_LOGIC_VECTOR(7 downto 0):= x"00";
     signal r_CE250_D10      : STD_LOGIC;
     

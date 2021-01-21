@@ -16,7 +16,7 @@ end T10_M3_modulatorB;
 
 architecture archModulatorB of T10_M3_modulatorB is
 
-    type t_modArray is array (0 to 7) of STD_LOGIC_VECTOR(7 downto 0);
+    type t_modArray is array (7 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
        
     signal r_mod_zero   : t_modArray := (x"80",x"A0",x"C0",x"A0",x"80",x"60",x"40",x"20");    
     signal r_mod_one    : t_modArray := (x"80",x"60",x"40",x"60",x"80",x"A0",x"C0",x"A0");

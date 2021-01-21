@@ -51,7 +51,8 @@ port map
 error: entity work.T10_M3_errorChannelB(archErrorChannelB)
 port map
 (
-    i_sysClock      => i_sysClock,   
+    i_sysClock      => i_sysClock,
+    i_CE2Hz         => i_CE2Hz,   
     i_CE250Hz       => i_CE250Hz,
     i_errorSelect   => i_errorSelect, 
     i_I_Tx          => r_I_Tx,
