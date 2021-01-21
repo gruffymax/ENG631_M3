@@ -15,30 +15,33 @@ end T10_M3_demodulatorB;
 
 architecture archDemodulatorB of T10_M3_demodulatorB is
     type t_wavArray is array (0 to 7) of UNSIGNED(7 downto 0);
-    signal r_wav_ref    : t_wavArray := (x"80",x"60",x"40",x"60",x"80",x"A0",x"C0",x"A0"); -- one
-                     
-    signal r_I_Sum      :   INTEGER     := 0;
-    signal r_Q_Sum      :   INTEGER     := 0;
-    signal r_dataready  :   STD_LOGIC   := '0';
-    signal r_dataCount  :   INTEGER range 0 to 7 := 0;
-    signal r_data       :   STD_LOGIC_VECTOR(3 downto 0);         
-    signal r_symbol     :   STD_LOGIC_VECTOR(1 downto 0);
+    signal r_wav_ref    : t_wavArray := (x"80",x"60",x"40",x"60",x"80",x"A0",x"C0",x"A0"); -- one                     
+    
+    signal r_I_Sum      :   INTEGER     := 0;                           -- mac value of I
+    signal r_Q_Sum      :   INTEGER     := 0;                           -- mac value of Q
+    signal r_dataready  :   STD_LOGIC   := '0';                         -- Flag for when modulated data has been 'mac'ed
+    signal r_dataCount  :   INTEGER range 0 to 7 := 0;                  -- Counts in the received symbols
+    signal r_symCount   :   INTEGER range 0 to 1 := 0;                  -- Count for low or high symbol
+    signal r_data       :   STD_LOGIC_VECTOR(3 downto 0) := "0000";     -- Assemble Symbols
+    signal r_data_Rx    :   STD_LOGIC_VECTOR(3 downto 0) := "0000";     -- For writing to output  
+    signal r_symbol_0   :   STD_LOGIC_VECTOR(1 downto 0) := "00";       -- First Symbol
+    signal r_symbol_1   :   STD_LOGIC_VECTOR(1 downto 0) := "00";
     signal r_CE250_D20  :   STD_LOGIC;
     
 begin
-
+    --------------- ENTITIES ---------------
     CEDelay: entity work.T10_M3_CE_Delay(behavioral)
         generic map
-        (   g_ce_delay => 20) -- 200ns Delay
+        (   g_ce_delay => 20) -- 200ns Clock Enable Delay
         port map
         (   i_Clk => i_sysClock,
             i_CE => i_CE250Hz,
             o_CE => r_CE250_D20);
-    
-    o_data_Rx <= r_data;
-    o_symbol_Rx <= r_symbol;  
+            
+    --------------- PROCESSES ---------------
     
     dataProc: process (i_sysClock)
+        -- Performs the multiply and accumulate on 
     begin
         if rising_edge(i_sysClock) then
             if r_CE250_D20 = '1' then
@@ -56,25 +59,45 @@ begin
     
     compProc: process (i_sysClock)
     begin
-        if rising_edge(i_sysClock) then
+        if rising_edge(i_sysClock) then          
             if r_dataReady = '1' then
-                if r_I_Sum > r_Q_Sum then
-                    -- 00 or 01
-                    if r_I_Sum > 150 then
-                        r_symbol <= "00";
-                    elsif r_I_Sum < -150 then
-                        r_symbol <= "01";
+               
+                if r_symCount = 0 then
+                    if r_I_Sum > r_Q_Sum then
+                        -- 00 or 01
+                        if r_I_Sum > 150 then
+                            r_symbol_0 <= "00";
+                        elsif r_I_Sum < -150 then
+                            r_symbol_0 <= "01";
+                        end if;
+                     elsif r_Q_Sum > r_I_Sum then
+                        -- 10 or 11
+                        if r_Q_Sum > 150 then
+                            r_symbol_0 <= "10";
+                        elsif r_Q_Sum < -150 then
+                            r_symbol_0 <= "11";
+                        end if;
+                     end if;
+                 
+             elsif r_symCount = 1 then
+                    if r_I_Sum > r_Q_Sum then
+                        -- 00 or 01
+                        if r_I_Sum > 150 then
+                            r_symbol_1 <= "00";
+                        elsif r_I_Sum < -150 then
+                            r_symbol_0 <= "01";
+                        end if;
+                     elsif r_Q_Sum > r_I_Sum then
+                        -- 10 or 11
+                        if r_Q_Sum > 150 then
+                            r_symbol_1 <= "10";
+                        elsif r_Q_Sum < -150 then
+                            r_symbol_1 <= "11";
+                        end if;   
                     end if;
-                 elsif r_Q_Sum > r_I_Sum then
-                    -- 10 or 11
-                    if r_Q_Sum > 150 then
-                        r_symbol <= "10";
-                    elsif r_Q_Sum < -150 then
-                        r_symbol <= "11";
-                    end if;
-                 end if;
+             end if;
             end if;
         end if;
     end process compProc;
-
+    o_data_Rx   <= r_data_Rx;
 end archDemodulatorB;

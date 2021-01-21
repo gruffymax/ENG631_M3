@@ -72,6 +72,7 @@ demodulator: entity work.T10_M3_demodulatorB(archDemodulatorB)
 port map
 (
     i_sysClock  => i_sysClock,
+    i_CE250Hz   => i_CE250Hz,
     i_I_Rx      => r_I_Rx,
     i_Q_Rx      => r_Q_Rx,
     o_data_Rx   => r_data_Rx,
