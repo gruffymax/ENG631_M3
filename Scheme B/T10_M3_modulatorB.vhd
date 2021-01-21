@@ -6,8 +6,10 @@ entity T10_M3_modulatorB is
 Port ( 
     i_sysClock      : in    STD_LOGIC;                       -- Clock Input
     i_CE250Hz       : in    STD_LOGIC;                          
-    i_symFlag       : inout STD_LOGIC;                       -- New Symbol Flag
+    i_symFlag       : in    STD_LOGIC;                       -- New Symbol Flag
     i_symInput      : in    STD_LOGIC_VECTOR(1 downto 0);
+    
+    o_modFlag       : out   STD_LOGIC;
     o_I_Tx          : out   STD_LOGIC_VECTOR(7 downto 0);
     o_Q_Tx          : out   STD_LOGIC_VECTOR(7 downto 0)
     );
@@ -37,27 +39,27 @@ begin
             if i_symFlag = '1' then
                 case i_symInput is
                     when "00" =>        -- I = 0 , Q = Null
-                        r_IArray <= r_mod_zero;
-                        r_QArray <= r_mod_null;
-                        i_symFlag <= '0';
+                        r_IArray    <= r_mod_zero;
+                        r_QArray    <= r_mod_null;
+                        o_modFlag   <= '0';
                         r_dataReady <= '1';
                         
                     when "10" =>        -- I = Null, Q = 0
-                        r_IArray <= r_mod_null;
-                        r_QArray <= r_mod_zero;
-                        i_symFlag <= '0';
+                        r_IArray    <= r_mod_null;
+                        r_QArray    <= r_mod_zero;
+                        o_modFlag   <= '0';
                         r_dataReady <= '1';
                         
                     when "11" =>        -- I = 1, Q = Null
-                        r_IArray <= r_mod_one;
-                        r_QArray <= r_mod_null;
-                        i_symFlag <= '0';
+                        r_IArray    <= r_mod_one;
+                        r_QArray    <= r_mod_null;
+                        o_modFlag   <= '0';
                         r_dataReady <= '1';
                         
                     when "01" =>        -- I = Null, Q = 1
-                        r_IArray <= r_mod_null;
-                        r_QArray <= r_mod_one;
-                        i_symFlag <= '0';
+                        r_IArray    <= r_mod_null;
+                        r_QArray    <= r_mod_one;
+                        o_modFlag   <= '0';
                         r_dataReady <= '1';                
                 end case;
             end if;    

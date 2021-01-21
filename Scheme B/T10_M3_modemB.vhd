@@ -28,6 +28,7 @@ end T10_M3_modem;
 architecture archModem of T10_M3_modem is
 
  signal r_symFlag   : STD_LOGIC;
+ signal r_modFlag   : STD_LOGIC;
  signal r_I_Tx      : STD_LOGIC_VECTOR(7 downto 0);
  signal r_Q_Tx      : STD_LOGIC_VECTOR(7 downto 0);
  signal r_I_Rx      : STD_LOGIC_VECTOR(7 downto 0);
@@ -41,6 +42,9 @@ begin
     if rising_edge(i_sysClock) then
         if i_CE2Hz = '1' then
             r_symFlag <= '1';
+        end if;
+        if r_modFlag = '1' then
+            r_symFlag <= '0';
         end if;   
     end if;
 end process newSymProc;
