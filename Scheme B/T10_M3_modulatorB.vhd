@@ -5,11 +5,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity T10_M3_modulatorB is
 Port ( 
     i_sysClock      : in    STD_LOGIC;                       -- Clock Input
-    i_CE250Hz       : in    STD_LOGIC;                          
-    i_symFlag       : in    STD_LOGIC;                       -- New Symbol Flag
+    i_CE250Hz       : in    STD_LOGIC;
+    i_CE2Hz         : in    STD_LOGIC;                          
     i_symInput      : in    STD_LOGIC_VECTOR(1 downto 0);
     
-    o_modFlag       : out   STD_LOGIC;
     o_I_Tx          : out   STD_LOGIC_VECTOR(7 downto 0);
     o_Q_Tx          : out   STD_LOGIC_VECTOR(7 downto 0)
     );
@@ -29,56 +28,61 @@ architecture archModulatorB of T10_M3_modulatorB is
     signal r_QArray    : t_modArray := (others => x"00");
     signal r_I_Tx      : STD_LOGIC_VECTOR(7 downto 0);
     signal r_Q_Tx      : STD_LOGIC_VECTOR(7 downto 0);
-    signal r_dataReady : STD_LOGIC;
+    shared variable r_dataReady : STD_LOGIC;
+    signal r_CE2_D5    : STD_LOGIC;
     signal r_modCount  : INTEGER range 0 to 7;
     
 begin
     
-    dataSelectProc: process (i_sysClock, i_symFlag)
+    CEDelay: entity work.T10_M3_CE_Delay(behavioral)
+        generic map
+        (   g_ce_delay => 5) -- 50ns Clock Enable Delay
+        port map
+        (   i_Clk => i_sysClock,
+            i_CE => i_CE2Hz,
+            o_CE => r_CE2_D5);
+    
+    dataSelectProc: process (i_sysClock)
     begin
-        if rising_edge(i_sysClock) then
-            if i_symFlag = '1' then
+        if rising_edge(i_sysClock) then 
+            if r_CE2_D5 = '1' then
                 case i_symInput is
                     when "00" =>        -- I = 0 , Q = Null
                         r_IArray    <= r_mod_zero;
                         r_QArray    <= r_mod_null;
-                        o_modFlag   <= '0';
-                        r_dataReady <= '1';
+                        r_dataReady := '1';
                         
                     when "10" =>        -- I = Null, Q = 0
                         r_IArray    <= r_mod_null;
                         r_QArray    <= r_mod_zero;
-                        o_modFlag   <= '0';
-                        r_dataReady <= '1';
+                        r_dataReady := '1';
                         
                     when "11" =>        -- I = 1, Q = Null
                         r_IArray    <= r_mod_one;
                         r_QArray    <= r_mod_null;
-                        o_modFlag   <= '0';
-                        r_dataReady <= '1';
+                        r_dataReady := '1';
                         
                     when "01" =>        -- I = Null, Q = 1
                         r_IArray    <= r_mod_null;
                         r_QArray    <= r_mod_one;
-                        o_modFlag   <= '0';
-                        r_dataReady <= '1';
+                        r_dataReady := '1';
                     when others =>
                         r_IArray    <= (others => x"00");
                         r_QArray    <= (others => x"00");
-                        o_modFlag   <= '0';
-                        r_dataReady <= '0';                    
+                        r_dataReady := '0';                    
                 end case;
             end if;    
         end if;
     end process dataSelectProc;
     
-    modTxProc: process (i_sysClock, r_dataReady)
+    modTxProc: process (i_sysClock)
     begin
         if rising_edge(i_sysClock) then
             if i_CE250Hz = '1' then
                 if r_dataReady = '1' then
                     if r_modCount = 7 then
                        r_modCount <= 0;
+                       r_dataReady :='0';
                     else
                        r_modCount <= r_modCount + 1;                       
                     end if;

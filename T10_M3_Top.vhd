@@ -343,7 +343,7 @@ begin
         (
             i_sysClock  => w_system_clk,
             i_CE2Hz     => w_CE2,
-            i_CE250Hz   => w_CE250,
+            i_CE250Hz   => w_CE16,
             i_Symbol    => w_symbol,
             i_errorSelect => w_error_switch,
             o_I_Tx      => w_ItxB,

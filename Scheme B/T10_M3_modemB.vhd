@@ -37,24 +37,12 @@ architecture archModem of T10_M3_modem is
  signal r_symbol_Rx : STD_LOGIC_VECTOR(1 downto 0);
 begin
 
-newSymProc: process (i_sysClock, i_CE2Hz)
-begin
-    if rising_edge(i_sysClock) then
-        if i_CE2Hz = '1' then
-            r_symFlag <= '1';
-        end if;
-        if i_CE250Hz = '1' then
-            r_symFlag <= '0';
-        end if;   
-    end if;
-end process newSymProc;
-
 modulator: entity work.T10_M3_modulatorB(archModulatorB)
 port map
 (
     i_sysClock  => i_sysClock,
     i_CE250Hz   => i_CE250Hz,
-    i_symFlag   => r_symFlag,     
+    i_CE2Hz     => i_CE2Hz,
     i_symInput  => i_Symbol,
     o_I_Tx      => r_I_Tx,
     o_Q_Tx      => r_Q_Tx
@@ -83,10 +71,11 @@ port map
     o_symbol_Rx => r_symbol_Rx
 );
 
-o_I_Tx      <= r_I_Tx;    
-o_Q_Tx      <= r_Q_Tx;
-o_data_Rx   <= r_data_Rx;
-o_I_Rx      <= r_I_Rx;
-o_Q_Rx      <= r_Q_Rx;
+
+    o_I_Tx      <= r_I_Tx;    
+    o_Q_Tx      <= r_Q_Tx;
+    o_data_Rx   <= r_data_Rx;
+    o_I_Rx      <= r_I_Rx;
+    o_Q_Rx      <= r_Q_Rx;
 
 end archModem;
