@@ -17,12 +17,13 @@ end T10_M3_modulatorB;
 
 architecture archModulatorB of T10_M3_modulatorB is
 
-    type t_modArray is array (0 to 7) of STD_LOGIC_VECTOR(7 downto 0);   
-    signal r_mod_zero  : t_modArray := (x"80",x"A0",x"C0",x"A0",x"80",x"60",x"40",x"20");
-    signal r_mod_one   : t_modArray := (x"80",x"60",x"40",x"60",x"80",x"A0",x"C0",x"A0");
-    signal r_mod_null  : t_modArray := (others => "10000000");
-    signal r_mod_start : t_modArray := (others => "11000000");
-    signal r_mod_stop  : t_modArray := (others => "01000000");
+    type t_modArray is array (0 to 7) of STD_LOGIC_VECTOR(7 downto 0);
+       
+    signal r_mod_zero   : t_modArray := (x"80",x"A0",x"C0",x"A0",x"80",x"60",x"40",x"20");    
+    signal r_mod_one    : t_modArray := (x"80",x"60",x"40",x"60",x"80",x"A0",x"C0",x"A0");
+    signal r_mod_null   : t_modArray := (others => "10000000");
+    signal r_mod_start  : t_modArray := (others => "11000000");
+    signal r_mod_stop   : t_modArray := (others => "01000000");
     
     signal r_IArray    : t_modArray := (others => x"00");
     signal r_QArray    : t_modArray := (others => x"00");
@@ -60,7 +61,12 @@ begin
                         r_IArray    <= r_mod_null;
                         r_QArray    <= r_mod_one;
                         o_modFlag   <= '0';
-                        r_dataReady <= '1';                
+                        r_dataReady <= '1';
+                    when others =>
+                        r_IArray    <= (others => x"00");
+                        r_QArray    <= (others => x"00");
+                        o_modFlag   <= '0';
+                        r_dataReady <= '0';                    
                 end case;
             end if;    
         end if;

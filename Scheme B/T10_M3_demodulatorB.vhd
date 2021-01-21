@@ -99,5 +99,6 @@ begin
             end if;
         end if;
     end process compProc;
-    o_data_Rx   <= r_data_Rx;
+    o_data_Rx(1 downto 0)   <= r_symbol_0;
+    o_data_Rx(3 downto 2)   <= r_symbol_1;
 end archDemodulatorB;

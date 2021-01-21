@@ -43,7 +43,7 @@ begin
         if i_CE2Hz = '1' then
             r_symFlag <= '1';
         end if;
-        if r_modFlag = '1' then
+        if i_CE250Hz = '1' then
             r_symFlag <= '0';
         end if;   
     end if;

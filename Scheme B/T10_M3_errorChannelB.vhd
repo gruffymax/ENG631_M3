@@ -74,7 +74,10 @@ begin
                         else
                             r_errorI <= (unsigned(i_I_Tx)) - (unsigned(r_rand(5 downto 0)));
                             r_errorQ <= (unsigned(i_Q_Tx)) - (unsigned(r_rand(5 downto 0)));
-                        end if;             
+                        end if;
+                    when others =>
+                            r_errorI <= x"00";
+                            r_errorQ <= x"00";           
                 end case;
             end if;
         end if;
