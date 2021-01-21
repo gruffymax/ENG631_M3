@@ -348,7 +348,7 @@ begin
             i_errorSelect => w_error_switch,
             o_I_Tx      => w_ItxB,
             o_Q_Tx      => w_QtxB,
-            o_dat_Rx    => w_Dmod_DataB,
+            o_data_Rx    => w_Dmod_DataB,
             o_I_Rx      => w_IrxB,
             o_Q_Rx      => w_QrxB
         );
