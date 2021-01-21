@@ -42,6 +42,7 @@ begin
         (   i_Clk => i_sysClock,
             i_CE => i_CE2Hz,
             o_CE => r_CE2_D5);
+            
     CEDelay7: entity work.T10_M3_CE_Delay(behavioral)
         generic map
         (   g_ce_delay => 7) -- 70ns Clock Enable Delay

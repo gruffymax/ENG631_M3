@@ -48,7 +48,8 @@ begin
                     r_dataCount <= 0;
                     r_dataready <= '1';
                 else
-                    r_dataCount <= r_dataCount + 1;                
+                    r_dataCount <= r_dataCount + 1;
+                    r_dataReady <= '0';                
                 end if;
                 r_I_Sum <= r_I_Sum + (r_wav_ref(r_dataCount) * to_integer(unsigned(i_I_Rx)));
                 r_Q_Sum <= r_Q_Sum + (r_wav_ref(r_dataCount) * to_integer(unsigned(i_Q_Rx)));
@@ -62,11 +63,15 @@ begin
             if r_dataReady = '1' then
                if r_symCount = 1 then
                     r_symCount <= 0;
+                    r_I_Sum <= 0;
+                    r_Q_Sum <= 0;
                else
                     r_symCount <= 1;
+                    r_I_Sum <= 0;
+                    r_Q_Sum <= 0;
                end if;
                
-                if r_symCount = 0 then
+               if r_symCount = 0 then
                     if r_I_Sum > r_Q_Sum then
                         -- 00 or 01
                         if r_I_Sum > 150 then
@@ -84,21 +89,21 @@ begin
                      end if;
                  
              elsif r_symCount = 1 then
-                    if r_I_Sum > r_Q_Sum then
-                        -- 00 or 01
-                        if r_I_Sum > 150 then
-                            r_symbol_1 <= "00";
-                        elsif r_I_Sum < -150 then
-                            r_symbol_0 <= "01";
-                        end if;
-                     elsif r_Q_Sum > r_I_Sum then
-                        -- 10 or 11
-                        if r_Q_Sum > 150 then
-                            r_symbol_1 <= "10";
-                        elsif r_Q_Sum < -150 then
-                            r_symbol_1 <= "11";
-                        end if;   
+                if r_I_Sum > r_Q_Sum then
+                    -- 00 or 01
+                    if r_I_Sum > 150 then
+                        r_symbol_1 <= "00";
+                    elsif r_I_Sum < -150 then
+                        r_symbol_0 <= "01";
                     end if;
+                 elsif r_Q_Sum > r_I_Sum then
+                    -- 10 or 11
+                    if r_Q_Sum > 150 then
+                        r_symbol_1 <= "10";
+                    elsif r_Q_Sum < -150 then
+                        r_symbol_1 <= "11";
+                    end if;   
+                end if;
              end if;
             end if;
         end if;
