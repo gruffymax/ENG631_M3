@@ -8,8 +8,7 @@ Port (
     i_CE250Hz       : in STD_LOGIC;                         -- 250Hz Clock Enable
     i_I_Rx          : in STD_LOGIC_VECTOR  (7 downto 0);    -- I transmission in
     i_Q_Rx          : in STD_LOGIC_VECTOR  (7 downto 0);    -- Q transmission in
-    o_data_Rx       : out STD_LOGIC_VECTOR (3 downto 0);    -- Data Value Received Out
-    o_symbol_Rx     : out STD_LOGIC_VECTOR (1 downto 0)     -- Symbol Received Out
+    o_data_Rx       : out STD_LOGIC_VECTOR (3 downto 0)    -- Data Value Received Out
     );
 end T10_M3_demodulatorB;
 
@@ -24,8 +23,8 @@ architecture archDemodulatorB of T10_M3_demodulatorB is
     signal r_symCount   :   INTEGER range 0 to 1 := 0;                  -- Count for low or high symbol
     signal r_data       :   STD_LOGIC_VECTOR(3 downto 0) := "0000";     -- Assemble Symbols
     signal r_data_Rx    :   STD_LOGIC_VECTOR(3 downto 0) := "0000";     -- For writing to output  
-    signal r_symbol_0   :   STD_LOGIC_VECTOR(1 downto 0) := "00";       -- First Symbol
-    signal r_symbol_1   :   STD_LOGIC_VECTOR(1 downto 0) := "00";
+    signal r_symbol_0   :   STD_LOGIC_VECTOR(1 downto 0);       -- First Symbol
+    signal r_symbol_1   :   STD_LOGIC_VECTOR(1 downto 0);
     signal r_CE250_D20  :   STD_LOGIC;
     
 begin
@@ -61,6 +60,11 @@ begin
     begin
         if rising_edge(i_sysClock) then          
             if r_dataReady = '1' then
+               if r_symCount = 1 then
+                    r_symCount <= 0;
+               else
+                    r_symCount <= 1;
+               end if;
                
                 if r_symCount = 0 then
                     if r_I_Sum > r_Q_Sum then
@@ -99,6 +103,8 @@ begin
             end if;
         end if;
     end process compProc;
+    
     o_data_Rx(1 downto 0)   <= r_symbol_1;
     o_data_Rx(3 downto 2)   <= r_symbol_0;
+    
 end archDemodulatorB;

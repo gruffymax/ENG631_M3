@@ -20,8 +20,7 @@ entity T10_M3_modem is
         o_Q_Tx          : out STD_LOGIC_VECTOR(7 downto 0);
         o_I_Rx          : out STD_LOGIC_VECTOR(7 downto 0);
         o_Q_Rx          : out STD_LOGIC_VECTOR(7 downto 0);
-        o_data_Rx       : out STD_LOGIC_VECTOR(3 downto 0);    -- Data Value Received Out
-        o_symbol_Rx     : out STD_LOGIC_VECTOR(1 downto 0)     -- Symbol Received Out
+        o_data_Rx       : out STD_LOGIC_VECTOR(3 downto 0)    -- Data Value Received Out
         );
 end T10_M3_modem;
 
@@ -68,8 +67,7 @@ port map
     i_CE250Hz   => i_CE250Hz,
     i_I_Rx      => r_I_Rx,
     i_Q_Rx      => r_Q_Rx,
-    o_data_Rx   => r_data_Rx,
-    o_symbol_Rx => r_symbol_Rx
+    o_data_Rx   => r_data_Rx
 );
 
 
